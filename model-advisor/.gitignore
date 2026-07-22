@@ -1,0 +1,18 @@
+# Secrets — never commit
+.dev.vars
+.dev.vars.*
+*.env
+.env*
+
+# Dependencies
+node_modules/
+
+# Wrangler / build artifacts
+.wrangler/
+dist/
+*.log
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/

@@ -1,0 +1,43 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "model-advisor",
+  "main": "src/index.ts",
+  // hnimonkar-individual-account
+  "account_id": "2ed8a59cc284f84402c233547ec7ed75",
+  "compatibility_date": "2026-07-22",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "preview_urls": true,
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  },
+
+  // REST / live-measure account must match CF_AI_TOKEN (Workers AI enabled).
+  // Optional AI Gateway: set secrets CF_AIG_GATEWAY (+ CF_AIG_TOKEN if auth).
+  "vars": {
+    "CF_ACCOUNT_ID": "e31fc08f21f7e4098548c7b166bacce8",
+    "CF_AIG_ACCOUNT_ID": "e31fc08f21f7e4098548c7b166bacce8"
+  },
+
+  "ai": {
+    "binding": "AI",
+    "remote": true
+  },
+
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "model-advisor-db",
+      "database_id": "7f656341-890f-469c-bfd2-5c50d705ffe6"
+    }
+  ],
+
+  // Optional: serve SPA from same Worker when ASSETS is present (combined deploy).
+  "assets": {
+    "directory": "../dist",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*", "/health"]
+  }
+}
